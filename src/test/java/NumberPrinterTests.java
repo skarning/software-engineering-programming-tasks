@@ -6,9 +6,16 @@ public class NumberPrinterTests {
     @Test
     public void getNumbersTest() {
         NumberPrinter numberPrinter = new NumberPrinter(0, 100);
-        assertEquals("HI", numberPrinter.getNumber(0));
-        assertEquals("1", numberPrinter.getNumber(1));
-        assertEquals("2", numberPrinter.getNumber(2));
-        assertEquals("HI", numberPrinter.getNumber(3));
+        for(int i = 0; i <= 100; i++) {
+            if ((i % 3) == 0 && (i % 5) == 0)
+                assertEquals("HiOf", numberPrinter.getNumber(i));
+            else if ((i % 3) == 0)
+                assertEquals("Hi", numberPrinter.getNumber(i));
+            else if ((i % 5) == 0)
+                assertEquals("Of", numberPrinter.getNumber(i));
+
+            else
+                assertEquals("" + i, numberPrinter.getNumber(i));
+        }
     }
 }
