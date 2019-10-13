@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class NumberPrinterTests {
-    private final static int TEST_FROM = 0;
+    private final static int TEST_FROM = 1;
     private final static int TEST_TO = 100;
 
     private final static int NUM_DIVIDABLE_WITH_THREE = 3;
@@ -161,9 +161,22 @@ public class NumberPrinterTests {
         is correct
     */
     @ParameterizedTest
-    @ValueSource (ints = {0, 15, 30, 45, 60})
+    @ValueSource (ints = {15, 30, 45, 60})
     public void getCorrectStringFromInput_HiOf_number_is_dividable_with_three_and_five_subset(int number) {
         NumberPrinter numberPrinter = new NumberPrinter(TEST_FROM,TEST_TO);
         assertEquals("HiOf", numberPrinter.getCorrectStringFromInputValue(number));
+    }
+
+    /*
+        Checks if TooNegativeException
+        is thrown for negative numbers
+    */
+    @ParameterizedTest
+    @ValueSource (ints = {0,-1,-3,-5,-7,-11})
+    public void getCorrectStringFromInput_TooNegativeException_zero_and_negative_numbers(int number){
+        NumberPrinter numberPrinter = new NumberPrinter(TEST_FROM, TEST_TO);
+        assertThrows(TooNegativeException.class, () -> {
+            numberPrinter.getCorrectStringFromInputValue(number);
+        });
     }
 }
